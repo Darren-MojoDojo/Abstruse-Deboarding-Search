@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Abstruse Deboarding Search",
+  "version": "0.0.67",
+  "description": "Spotlight-style search to jump to any SimpleOnboarding organisation.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Abstruse Search",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": ["storage", "tabs"],
+  "host_permissions": ["https://new.simpleonboarding.com.au/*"],
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F"
+      },
+      "description": "Open SimpleOnboarding organisation search"
+    }
+  }
+}
