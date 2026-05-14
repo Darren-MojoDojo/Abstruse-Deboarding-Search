@@ -135,29 +135,17 @@ function initialsOf(name) {
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }
 
-const AVATAR_PALETTE = [
-  { bg: "#4F46E5", fg: "#fff" }, // indigo
-  { bg: "#059669", fg: "#fff" }, // emerald
-  { bg: "#E11D48", fg: "#fff" }, // rose
-  { bg: "#D97706", fg: "#fff" }, // amber
-  { bg: "#0284C7", fg: "#fff" }, // sky
-  { bg: "#7C3AED", fg: "#fff" }, // violet
-  { bg: "#65A30D", fg: "#fff" }, // lime
-  { bg: "#A21CAF", fg: "#fff" }, // fuchsia
-];
+const AVATAR_VARIANTS = 8;
 
-function avatarColorFor(name) {
+function avatarVariantFor(name) {
   let h = 0;
   for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) | 0;
-  return AVATAR_PALETTE[Math.abs(h) % AVATAR_PALETTE.length];
+  return (Math.abs(h) % AVATAR_VARIANTS) + 1; // 1..8
 }
 
 function makeAvatar(name, role) {
   const el = document.createElement("div");
-  el.className = "result-avatar";
-  const { bg, fg } = avatarColorFor(name);
-  el.style.background = bg;
-  el.style.color = fg;
+  el.className = `result-avatar avatar-${avatarVariantFor(name)}`;
   el.textContent = initialsOf(name);
   el.title = role ? `${role}: ${name}` : name;
   return el;

@@ -1,8 +1,28 @@
 :root {
   --color-indigo-50: #EEF2FF;
   --color-indigo-100: #E0E7FF;
+  --color-indigo-200: #C7D2FE;
   --color-indigo-600: #4F46E5;
   --color-indigo-700: #4338CA;
+  --color-indigo-800: #3730A3;
+
+  --color-emerald-100: #D1FAE5;
+  --color-emerald-200: #A7F3D0;
+  --color-emerald-700: #047857;
+  --color-emerald-800: #065F46;
+
+  --color-amber-100: #FEF3C7;
+  --color-amber-200: #FDE68A;
+  --color-amber-700: #B45309;
+  --color-amber-800: #92400E;
+
+  --color-rose-100: #FFE4E6;
+  --color-rose-600: #E11D48;
+  --color-rose-700: #BE123C;
+
+  --color-neutral-200: #E3E1EA;
+  --color-neutral-700: #3D394C;
+
   --color-text: #18181B;
   --color-text-muted: #52525B;
   --color-text-faint: #71717A;
@@ -15,7 +35,24 @@
   --color-border-strong: rgba(24, 24, 27, 0.12);
   --color-brand: var(--color-indigo-600);
   --color-brand-strong: var(--color-indigo-700);
-  --color-rose-600: #E11D48;
+
+  /* Avatar palette */
+  --color-avatar-1-bg: var(--color-indigo-100);
+  --color-avatar-1-text: var(--color-indigo-700);
+  --color-avatar-2-bg: var(--color-emerald-100);
+  --color-avatar-2-text: var(--color-emerald-700);
+  --color-avatar-3-bg: var(--color-amber-100);
+  --color-avatar-3-text: var(--color-amber-700);
+  --color-avatar-4-bg: var(--color-rose-100);
+  --color-avatar-4-text: var(--color-rose-700);
+  --color-avatar-5-bg: var(--color-indigo-200);
+  --color-avatar-5-text: var(--color-indigo-800);
+  --color-avatar-6-bg: var(--color-emerald-200);
+  --color-avatar-6-text: var(--color-emerald-800);
+  --color-avatar-7-bg: var(--color-neutral-200);
+  --color-avatar-7-text: var(--color-neutral-700);
+  --color-avatar-8-bg: var(--color-amber-200);
+  --color-avatar-8-text: var(--color-amber-800);
 }
 
 * { box-sizing: border-box; }
@@ -135,6 +172,15 @@ body {
   text-transform: uppercase;
   cursor: default;
 }
+
+.result-avatar.avatar-1 { background: var(--color-avatar-1-bg); color: var(--color-avatar-1-text); }
+.result-avatar.avatar-2 { background: var(--color-avatar-2-bg); color: var(--color-avatar-2-text); }
+.result-avatar.avatar-3 { background: var(--color-avatar-3-bg); color: var(--color-avatar-3-text); }
+.result-avatar.avatar-4 { background: var(--color-avatar-4-bg); color: var(--color-avatar-4-text); }
+.result-avatar.avatar-5 { background: var(--color-avatar-5-bg); color: var(--color-avatar-5-text); }
+.result-avatar.avatar-6 { background: var(--color-avatar-6-bg); color: var(--color-avatar-6-text); }
+.result-avatar.avatar-7 { background: var(--color-avatar-7-bg); color: var(--color-avatar-7-text); }
+.result-avatar.avatar-8 { background: var(--color-avatar-8-bg); color: var(--color-avatar-8-text); }
 
 .result mark {
   background: transparent;
