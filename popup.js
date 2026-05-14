@@ -83,7 +83,11 @@ async function fetchOrganizations() {
       operationName: "GetOrganizationsForDashboard",
       variables: { view: "active" },
       query: `query GetOrganizationsForDashboard($view: String!) {
-        organizations(view: $view) { id name }
+        organizations(view: $view) {
+          id
+          name
+          accountManager
+        }
       }`,
     }),
   });
@@ -91,7 +95,11 @@ async function fetchOrganizations() {
   const j = await r.json();
   if (j.errors) throw new Error(j.errors[0]?.message || "GraphQL error");
   return (j.data?.organizations || [])
-    .map((o) => ({ id: o.id, name: (o.name || "").trim() }))
+    .map((o) => ({
+      id: o.id,
+      name: (o.name || "").trim(),
+      accountManager: (o.accountManager || "").trim(),
+    }))
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
@@ -118,6 +126,41 @@ function setStatus(text, kind = "") {
   statusEl.hidden = false;
   statusEl.textContent = text;
   statusEl.className = "status" + (kind ? ` ${kind}` : "");
+}
+
+function initialsOf(name) {
+  const parts = (name || "").trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return "?";
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+
+const AVATAR_PALETTE = [
+  { bg: "#4F46E5", fg: "#fff" }, // indigo
+  { bg: "#059669", fg: "#fff" }, // emerald
+  { bg: "#E11D48", fg: "#fff" }, // rose
+  { bg: "#D97706", fg: "#fff" }, // amber
+  { bg: "#0284C7", fg: "#fff" }, // sky
+  { bg: "#7C3AED", fg: "#fff" }, // violet
+  { bg: "#65A30D", fg: "#fff" }, // lime
+  { bg: "#A21CAF", fg: "#fff" }, // fuchsia
+];
+
+function avatarColorFor(name) {
+  let h = 0;
+  for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) | 0;
+  return AVATAR_PALETTE[Math.abs(h) % AVATAR_PALETTE.length];
+}
+
+function makeAvatar(name, role) {
+  const el = document.createElement("div");
+  el.className = "result-avatar";
+  const { bg, fg } = avatarColorFor(name);
+  el.style.background = bg;
+  el.style.color = fg;
+  el.textContent = initialsOf(name);
+  el.title = role ? `${role}: ${name}` : name;
+  return el;
 }
 
 function highlight(name, tokens) {
@@ -195,6 +238,15 @@ function renderResults() {
     name.className = "name";
     name.innerHTML = highlight(o.name, tokens);
     item.appendChild(name);
+
+    if (o.accountManager || o.contentManager) {
+      const group = document.createElement("div");
+      group.className = "result-avatars";
+      if (o.accountManager) {
+        group.appendChild(makeAvatar(o.accountManager, "Account manager"));
+      }
+      item.appendChild(group);
+    }
 
     item.addEventListener("mouseenter", () => setActive(i));
     item.addEventListener("click", (ev) => openOrg(i, ev.shiftKey));
