@@ -65,16 +65,16 @@ body {
   overflow-y: auto;
   padding: 4px 6px 8px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(79, 70, 229, 0.35) transparent;
+  scrollbar-color: rgba(24, 24, 27, 0.12) transparent;
 }
 
 #results::-webkit-scrollbar { width: 6px; }
 #results::-webkit-scrollbar-track { background: transparent; }
 #results::-webkit-scrollbar-thumb {
-  background: rgba(79, 70, 229, 0.35);
+  background: var(--color-border-strong);
   border-radius: 999px;
 }
-#results::-webkit-scrollbar-thumb:hover { background: rgba(79, 70, 229, 0.6); }
+#results::-webkit-scrollbar-thumb:hover { background: rgba(24, 24, 27, 0.22); }
 
 .result {
   display: flex;
